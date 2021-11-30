@@ -1,15 +1,15 @@
 const db = require('../models');
 const crypto = require('crypto');
 
-const Article = db.article;
+const Category = db.category;
 
 function create(req, res) {
   const id = crypto.randomBytes(10).toString('hex');
-  Article.create({ id,...req.body })
+  Category.create({ id,...req.body })
     .then((data) => res.status(200).json({
       status: true,
-      message: 'new article created',
-      article: data
+      message: 'new category created',
+      category: data
     }))
     .catch((err) => res.status(422).json({
       status: flase,
@@ -18,11 +18,11 @@ function create(req, res) {
 }
 
 function findAll(_, res) {
-  Article.findAll()
+  Category.findAll()
     .then((data) => res.status(200).json({
       status: true,
-      message: 'grabbed all articles',
-      articles: data
+      message: 'grabbed all categories',
+      categories: data
     }))
     .catch((err) => res.status(422).json({
       status: false,
@@ -32,11 +32,11 @@ function findAll(_, res) {
 
 function findOne(req, res) {
   const { id } = req.params;
-  Article.findByPk(id)
+  Category.findByPk(id)
     .then((data) => res.status(200).json({
       status: true,
-      message: 'grabbed one article',
-      article: data
+      message: 'grabbed one category',
+      category: data
     }))
     .catch((err) => res.status(422).json({
       status: true,

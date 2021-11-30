@@ -27,9 +27,11 @@ const sequelize = new Sequelize(database, username, password, {
 });
 
 const article = require('./article.model')(sequelize, Sequelize);
+const category = require('./category.model')(sequelize, Sequelize);
 
 module.exports = {
   Sequelize,
   sequelize,
   article,
+  category,
 };

@@ -1,5 +1,6 @@
 const express = require('express');
 const article = require('./routes/article.route');
+const category = require('./routes/category.route');
 
 require('dotenv').config();
 
@@ -15,6 +16,7 @@ app.get('/', (_, res) => {
 app.use(express.json());
 
 app.use('/articles', article);
+app.use('/categories', category);
 
 const PORT = process.env.APP_PORT || 8000;
 app.listen(PORT, () => {
