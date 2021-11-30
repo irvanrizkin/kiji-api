@@ -1,5 +1,6 @@
-
 const express = require('express');
+const article = require('./routes/article.route');
+
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +13,8 @@ app.get('/', (_, res) => {
 });
 
 app.use(express.json());
+
+app.use('/articles', article);
 
 const PORT = process.env.APP_PORT || 8000;
 app.listen(PORT, () => {
