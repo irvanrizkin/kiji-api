@@ -30,6 +30,14 @@ const article = require('./article.model')(sequelize, Sequelize);
 const category = require('./category.model')(sequelize, Sequelize);
 const comment = require('./comment.model')(sequelize, Sequelize);
 
+category.hasMany(article, {
+  as: 'articles'
+});
+article.belongsTo(category, {
+  foreignKey: 'categoryId',
+  as: 'category'
+})
+
 module.exports = {
   Sequelize,
   sequelize,

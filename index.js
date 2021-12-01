@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('./models');
 const article = require('./routes/article.route');
 const category = require('./routes/category.route');
 const comment = require('./routes/comment.route');
@@ -6,6 +7,10 @@ const comment = require('./routes/comment.route');
 require('dotenv').config();
 
 const app = express();
+
+// db.sequelize.sync({
+//   // force: true,
+// })
 
 app.get('/', (_, res) => {
   res.status(200).json({

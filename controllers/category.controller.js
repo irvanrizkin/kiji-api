@@ -32,7 +32,7 @@ function findAll(_, res) {
 
 function findOne(req, res) {
   const { id } = req.params;
-  Category.findByPk(id)
+  Category.findByPk(id, { include: ['articles'] })
     .then((data) => res.status(200).json({
       status: true,
       message: 'grabbed one category',
