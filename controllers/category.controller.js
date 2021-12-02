@@ -19,11 +19,20 @@ function create(req, res) {
 
 function findAll(_, res) {
   Category.findAll()
-    .then((data) => res.status(200).json({
-      status: true,
-      message: 'grabbed all categories',
-      categories: data
-    }))
+    .then((categories) => {
+      if (categories.length == 0) {
+        return res.status(200).json({
+          status: false,
+          message: 'no categories exist',
+          categories
+        })
+      }
+      return res.status(200).json({
+        status: true,
+        message: 'grabbed all categories',
+        categories
+      })
+    })
     .catch((err) => res.status(422).json({
       status: false,
       err
@@ -33,11 +42,20 @@ function findAll(_, res) {
 function findOne(req, res) {
   const { id } = req.params;
   Category.findByPk(id, { include: ['articles'] })
-    .then((data) => res.status(200).json({
-      status: true,
-      message: 'grabbed one category',
-      category: data
-    }))
+    .then((category) => {
+      if (category == null) {
+        return res.status(404).json({
+          status: false,
+          message: 'category not found',
+          category
+        });
+      }
+      return res.status(200).json({
+        status: true,
+        message: 'grabbed one category',
+        category
+      });
+    })
     .catch((err) => res.status(422).json({
       status: false,
       err
