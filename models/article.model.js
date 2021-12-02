@@ -9,6 +9,12 @@ module.exports = (sequelize, Sequelize) => {
     },
     content: {
       type: Sequelize.TEXT,
+    },
+    picture: {
+      type: Sequelize.STRING(1000),
+    },
+    source: {
+      type: Sequelize.STRING
     }
   });
   return article;
