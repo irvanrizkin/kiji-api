@@ -39,7 +39,7 @@ function findOne(req, res) {
       comment: data
     }))
     .catch((err) => res.status(422).json({
-      status: true,
+      status: false,
       err
     }))
 }

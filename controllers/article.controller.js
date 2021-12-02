@@ -12,7 +12,7 @@ function create(req, res) {
       article: data
     }))
     .catch((err) => res.status(422).json({
-      status: flase,
+      status: false,
       err
     }))
 }
@@ -39,7 +39,7 @@ function findOne(req, res) {
       article: data
     }))
     .catch((err) => res.status(422).json({
-      status: true,
+      status: false,
       err
     }))
 }

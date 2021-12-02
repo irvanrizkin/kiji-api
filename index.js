@@ -8,9 +8,6 @@ require('dotenv').config();
 
 const app = express();
 
-// db.sequelize.sync({
-//   // force: true,
-// })
 
 app.get('/', (_, res) => {
   res.status(200).json({

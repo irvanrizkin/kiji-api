@@ -7,7 +7,7 @@ module.exports = {
     })
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     queryInterface.removeColumn('comments', 'articleId')
   }
 };
