@@ -38,6 +38,14 @@ article.belongsTo(category, {
   as: 'category'
 })
 
+article.hasMany(comment, {
+  as: 'comments'
+})
+comment.belongsTo(article, {
+  foreignKey: 'articleId',
+  as: 'article'
+})
+
 module.exports = {
   Sequelize,
   sequelize,
