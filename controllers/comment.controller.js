@@ -2,9 +2,19 @@ const db = require('../models');
 const crypto = require('crypto');
 
 const Comment = db.comment;
+const Article = db.article;
 
-function create(req, res) {
+async function create(req, res) {
   const id = crypto.randomBytes(10).toString('hex');
+  const article = await Article.findByPk(req.body.articleId);
+
+  if (article == null) {
+    return res.status(404).json({
+      status: false,
+      message: 'cannot refer to null article',
+    })
+  }
+
   Comment.create({ id,...req.body })
     .then((data) => res.status(200).json({
       status: true,

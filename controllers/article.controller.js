@@ -2,19 +2,33 @@ const db = require('../models');
 const crypto = require('crypto');
 
 const Article = db.article;
+const Category = db.category;
 
-function create(req, res) {
+async function create(req, res) {
   const id = crypto.randomBytes(10).toString('hex');
-  Article.create({ id,...req.body })
-    .then((data) => res.status(200).json({
-      status: true,
-      message: 'new article created',
-      article: data
-    }))
-    .catch((err) => res.status(422).json({
+  const category = await Category.findByPk(req.body.categoryId);
+
+  if (category == null) {
+    return res.status(404).json({
       status: false,
-      err
-    }))
+      message: 'cannot refer to null category',
+    })
+  }
+
+  Article.create({ id,...req.body })
+    .then((data) => {
+      res.status(200).json({
+        status: true,
+        message: 'new article created',
+        article: data
+      })
+    })
+    .catch((err) => {
+      res.status(422).json({
+        status: false,
+        err
+      })
+    })
 }
 
 function findAll(_, res) {
